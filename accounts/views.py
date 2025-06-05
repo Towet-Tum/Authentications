@@ -61,11 +61,14 @@ class AuthViewSet(viewsets.GenericViewSet, AuditMixin):
             {
                 "access": str(access_token),
                 "refresh": str(refresh),
-                "role": user.role,
                 "email": user.email,
+                "role": user.role,
                 "id": str(user.id),  # Send user ID here
                 "detail": (
-                    f"{user.username}, you have registered successfully."
+                    (
+                        f"{user.username}, {user.role},"
+                        " you have registered successfully."
+                    )
                 ),
             },
             status=status.HTTP_201_CREATED,
@@ -89,10 +92,15 @@ class AuthViewSet(viewsets.GenericViewSet, AuditMixin):
             {
                 "access": str(access_token),
                 "refresh": str(refresh),
-                "role": user.role,
                 "email": user.email,
+                "role": user.role,
                 "id": str(user.id),
-                "detail": f"{user.username}, you have login successfully.",
+                "detail": (
+                    (
+                        f"{user.username}, {user.role},"
+                        " you have registered successfully."
+                    )
+                ),
             },
             status=status.HTTP_200_OK,
         )
